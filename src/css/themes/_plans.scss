@@ -1,0 +1,76 @@
+.il-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 300px));
+  grid-gap: 1.5rem;
+  justify-content: center;
+  align-content: center;
+  .il-plan--item {
+    padding: 0;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    background: $lightColor;
+    position: relative;
+    min-height: $minHeightCard + 200px;
+    max-height: $minHeightCard + 200px;
+    .il-plan--poster {
+      position: absolute;
+      width: $widthPoster;
+      height: 100%;
+      background-size: contain;
+      background-position: center 97%;
+      background-repeat: no-repeat;
+      z-index: 1;
+      opacity: 0.2;
+      //filter: blur(1px);
+    }
+    h4 {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h6 {
+      text-align: center;
+    }
+    .il-plan--header {
+      position: relative;
+      z-index: 2;
+      height: $heigthHeaderPoster;
+      background: $secondColor;
+    }
+    .il-plan--body {
+      position: relative;
+      padding: 0.5rem;
+      z-index: 3;
+      span.il-price {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.45rem 0;
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+      }
+      p {
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+      ul.il-feature {
+        display: block;
+        margin-top: 0.4rem;
+        min-height: 200px;
+        li {
+          padding: 0.25rem 0;
+          font-size: 0.7rem;
+          span {
+            font-size: 0.75rem;
+            display: block;
+            text-align: left;
+          }
+        }
+      }
+    }
+    .il-plan--footer {
+      padding: 0.4rem 0;
+      text-align: center;
+    }
+  }
+}

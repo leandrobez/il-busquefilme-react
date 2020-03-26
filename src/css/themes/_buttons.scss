@@ -1,0 +1,69 @@
+a.il-btn,
+button.il-btn {
+  display: inline-block;
+  width: 280px;
+  text-align: center;
+  height: 40px;
+  margin: 0 auto;
+  text-transform: uppercase;
+  padding: 3px 4px;
+  border: 1px solid $primaryColor;
+  &.il-btn--search,
+  &.il-btn--card,
+  &.il-btn--spotify {
+    cursor: pointer;
+    max-width: 100px;
+    margin-left: 0.4rem;
+    outline: none;
+    &:hover {
+      background: $primaryColor;
+      color: $lightColor;
+    }
+    i {
+      margin-left: 0.3rem;
+    }
+  }
+  &.il-btn--card {
+    border: none;
+  }
+  &.il-btn--spotify {
+    max-width: 210px;
+  }
+  &.il-btn--small {
+    max-width: 150px;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+      background: $primaryColor;
+      color: $lightColor;
+    }
+  }
+}
+
+a.il-btn--close {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #232322;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: $primaryColor;
+  position: absolute;
+  left: 50%;
+  top: $sliderHeightMobile + $headerHeightMobile + 50px;
+  @media (min-width: 680px) {
+    top: $sliderHeightDesktop + $headerHeightDesktop + 50px;
+  }
+  z-index: -1;
+  &.show {
+    z-index: 1;
+  }
+  transform: translateX(-50%);
+  &:hover {
+    opacity: 0.8;
+    background: $secondColor;
+    color: $lightColor;
+  }
+}

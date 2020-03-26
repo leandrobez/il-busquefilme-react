@@ -1,0 +1,32 @@
+.il-spotify--authorization {
+  width: 100%;
+  padding: 1rem 0;
+  .il-spotify--button {
+    padding: 1rem 0;
+    text-align: center;
+  }
+}
+.il-user-spotify {
+  display: flex;
+  padding: 0.45rem;
+  height: 150px;
+  justify-content: center;
+  .il-avatar {
+    width: 120px;
+    img {
+      border-radius: 50%;
+    }
+  }
+  .il-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 0 0.45rem;
+    span {
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      color: $lightColor;
+    }
+  }
+}

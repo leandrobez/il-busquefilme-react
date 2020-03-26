@@ -1,0 +1,116 @@
+.il-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 300px));
+  grid-gap: 0.4rem 0.35rem;
+  justify-content: center;
+  align-content: center;
+  .il-card--item {
+    padding: 0;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    background: $lightColor;
+    position: relative;
+    min-height: $minHeightCard;
+    max-height: $minHeightCard;
+    .il-card--poster {
+      position: absolute;
+      width: $widthPoster;
+      height: $heightPoster;
+      background-size: cover;
+      background-position: center top;
+      border-radius: 5px 5px 0 0;
+    }
+    .il-card--header {
+      position: relative;
+      width: $widthPoster;
+      top: 0;
+      background: $lightColor;
+      height: $heigthHeaderPoster;
+      border-radius: 5px 5px 0 0;
+      h4 {
+        margin: 0;
+        padding: 0;
+        font-size: 0.75rem;
+        text-align: center;
+        line-height: $heigthHeaderPoster;
+        text-transform: uppercase;
+      }
+    }
+    .il-card--body {
+      position: absolute;
+      bottom: $positionBottomCardBody;
+      width: 100%;
+      max-width: $widthPoster;
+      padding: 0.5rem;
+      height: $heigthCardBody;
+      background: $primaryColor;
+
+      &.il-body--transparent {
+        background: transparent;
+      }
+      ul li,
+      span {
+        display: block;
+        color: $textColorLightDefault;
+        &.il-release,
+        &.il-overview {
+          font-size: 0.75rem;
+        }
+      }
+    }
+    .il-card--button {
+      position: relative;
+      width: $widthPoster;
+      top: 415px;
+      height: 55px;
+      text-align: center;
+      border-radius: 0 0 5px 5px;
+      a {
+        margin: auto;
+        padding: 0;
+        line-height: 55px;
+        height: 100%;
+        @include easeOut;
+        &:hover {
+          transform: scale(0.95);
+          background: $mediumColor;
+          color: $linkLight;
+        }
+      }
+    }
+  }
+  &.il-posters {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+    .il-card--poster {
+      min-width: 200px;
+      max-width: 250px;
+      background-position: center;
+      background-size: contain;
+    }
+    .il-card--header {
+      width: 100%;
+    }
+    .il-card--body {
+      display: none;
+    }
+  }
+  &.il-wallpapers {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 500px));
+    .il-card--item {
+      width: 100%;
+      min-height: $minHeightCard/2;
+      .il-card--poster {
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: contain;
+      }
+      .il-card--header {
+        width: 100%;
+      }
+      .il-card--body {
+        display: none;
+      }
+    }
+  }
+}
