@@ -13,32 +13,31 @@ class Login extends Component {
   state = {
     abas: {
       login: true,
-      register: false
+      register: false,
     },
     alert: {
       show: false,
-      message: {}
-    }
+      message: {},
+    },
   };
 
   empty = () => {
     return;
   };
 
-  setAlert = message => {
-    console.log(message);
+  setAlert = (message) => {
     this.setState({
       alert: {
         show: true,
-        message: message
-      }
+        message: message,
+      },
     });
     setTimeout(() => {
       this.setState({
         alert: {
           show: false,
-          message: {}
-        }
+          message: {},
+        },
       });
     }, 5000);
   };
@@ -47,8 +46,8 @@ class Login extends Component {
     this.setState({
       abas: {
         login: true,
-        register: false
-      }
+        register: false,
+      },
     });
   };
 
@@ -56,15 +55,19 @@ class Login extends Component {
     this.setState({
       abas: {
         login: false,
-        register: true
-      }
+        register: true,
+      },
     });
   };
 
-  next = () => {
-    setTimeout(() => {
-      this.props.location.pathname = '/';
-    }, 6000);
+  next = (change) => {
+    if (change) {
+      setTimeout(() => {
+        const strWindowFeatures =
+          'menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes';
+        window.open('/', '_top', strWindowFeatures);
+      }, 4000);
+    }
   };
 
   render() {
@@ -74,9 +77,7 @@ class Login extends Component {
           <i className="fas fa-sign-in-alt"></i>
           <span>Access Your Account</span>
         </h2>
-        <div className="il-intro">
-          <img src="/images/banners/login.svg" alt="" />
-        </div>
+
         <div className="il-account">
           <div className="il-account--header">
             <ul className="il-abas">

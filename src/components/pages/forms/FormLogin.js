@@ -26,7 +26,6 @@ const handleInputLoginPwd = e => {
   };
 };
 
-
 const login = async e => {
   e.preventDefault();
   const url = apiUrl + END_POINT_LOGIN;
@@ -51,7 +50,8 @@ const login = async e => {
             error: false,
             message: {
               type: 'success',
-              value: 'Seu login foi feito com sucesso.'
+              value:
+                'Seu login foi feito com sucesso. Você será direcionado em 4s.'
             }
           };
           storeLogin(res.data.user.token);
@@ -72,9 +72,12 @@ const login = async e => {
 
 const setAlert = alertMessage => {
   let { alert, next } = myProps;
-  if (alertMessage.error !== null) {
+  if (!alertMessage.error) {
     alert(alertMessage.message);
-    next();
+    next(true);
+  } else {
+    alert(alertMessage.message);
+    next(false);
   }
 };
 
@@ -105,12 +108,10 @@ const FormLogin = props => {
           onChange={handleInputLoginPwd}
         />
       </div>
-      <div className="il-input--info il-center">
-        <button className="il-btn il-btn--entrance" type="submit">
+      <div className="il-form--buttom">
+        <button className="il-btn il-btn--submit" type="submit">
+          <i className="fas fa-key"></i>
           <span>Logar</span>
-          <span className="icon">
-            <i className="mdi mdi-24px mdi-check"></i>
-          </span>
         </button>
       </div>
     </form>

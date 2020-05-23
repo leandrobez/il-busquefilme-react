@@ -2,7 +2,7 @@ import theMovieDB from '../config/theMovieDB';
 import axios from 'axios';
 
 export const requestAPI = {
-  urlGenres: id => {
+  urlGenres: (id) => {
     return theMovieDB.url.genres.concat(
       id,
       '/movies',
@@ -28,9 +28,9 @@ export const requestAPI = {
       '&append_to_response=external_ids'
     );
   },
-  urlChoices: ids => {
+  urlChoices: (ids) => {
     let urlCollection = [];
-    ids.forEach(id => {
+    ids.forEach((id) => {
       urlCollection.push(
         theMovieDB.url.details.concat(
           id,
@@ -45,7 +45,7 @@ export const requestAPI = {
     });
     return urlCollection;
   },
-  urlSearchs: word => {
+  urlSearchs: (word) => {
     return theMovieDB.url.search.concat(
       '?api_key=',
       theMovieDB.appKey,
@@ -57,7 +57,7 @@ export const requestAPI = {
       '&append_to_response=external_ids'
     );
   },
-  urlDetails: id => {
+  urlDetails: (id) => {
     return theMovieDB.url.details.concat(
       id,
       '?api_key=',
@@ -68,7 +68,7 @@ export const requestAPI = {
       '&append_to_response=external_ids'
     );
   },
-  urlCasts: id => {
+  urlCasts: (id) => {
     return theMovieDB.url.details.concat(
       id,
       '/credits',
@@ -76,7 +76,7 @@ export const requestAPI = {
       theMovieDB.appKey
     );
   },
-  urlGalleries: id => {
+  urlGalleries: (id) => {
     return theMovieDB.url.details.concat(
       id,
       '/images',
@@ -84,20 +84,21 @@ export const requestAPI = {
       theMovieDB.appKey
     );
   },
-  getMovies: async url => {
+  getMovies: async (url) => {
+    if (!url) return;
     return await axios
       .get(url)
-      .then(res => {
+      .then((res) => {
         //filters
         if (
           (res.status === 200 && res.statusText === 'OK') ||
-          (res.status === 200 && res.statusText === '')
+          res.statusText === ''
         ) {
           return res.data;
         }
       })
-      .then(data => {
+      .then((data) => {
         return data;
       });
-  }
+  },
 };

@@ -9,7 +9,9 @@
   &.il-open {
     width: 100%;
     max-width: $maxWidthAside;
-    top: $headerHeightMobile;
+    //top: $headerHeightMobile;
+    top: 100px;
+    z-index: 15;
     @media screen and (min-width: 680px) {
       max-width: 80%;
       top: $headerHeightDesktop;

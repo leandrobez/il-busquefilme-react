@@ -1,45 +1,25 @@
 .il-slider {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .il-big--img {
-    position: relative;
-    width: 100%;
-    width: $maxSliderwidth;
-    height: $bannerHeightMobile;
-    @media screen and (min-width: 680px) {
-      height: $bannerHeightDesktop;
-    }
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
+  height: 100%;
+  min-height: $sliderHeightMobile;
+  transition: all 450ms ease-out;
   .il-sliders--item {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     transition: all 450ms ease-out;
-    z-index: 2;
-    .il-slider--img {
-      position: absolute;
-      width: 100%;
-      height: $sliderHeightMobile;
-      @media screen and (min-width: 680px) {
-        height: $sliderHeightDesktop;
-      }
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      z-index: 4;
-    }
-    &:nth-child(1):after {
-      @include backAfter;
+    &:nth-child(1) {
+      z-index: 14;
+      background: rgb(2, 0, 36);
       background: linear-gradient(
         90deg,
         rgba(2, 0, 36, 1) 0%,
@@ -47,13 +27,9 @@
         rgba(0, 212, 255, 1) 100%
       );
     }
-    &:nth-child(1) .il-slider--content h3,
-    &:nth-child(1) .il-slider--content p.il-slider-description {
-      color: white;
-    }
-
-    &:nth-child(2):after {
-      @include backAfter;
+    &:nth-child(2) {
+      z-index: 13;
+      background: rgb(2, 0, 36);
       background: linear-gradient(
         90deg,
         rgba(2, 0, 36, 1) 0%,
@@ -61,12 +37,9 @@
         rgba(242, 205, 192, 1) 100%
       );
     }
-    &:nth-child(2) .il-slider--content h3,
-    &:nth-child(2) .il-slider--content p.il-slider-description {
-      color: white;
-    }
-    &:nth-child(3):after {
-      @include backAfter;
+    &:nth-child(3) {
+      z-index: 12;
+      background: rgb(237, 236, 249);
       background: linear-gradient(
         90deg,
         rgba(237, 236, 249, 1) 0%,
@@ -74,12 +47,9 @@
         rgba(239, 242, 192, 1) 100%
       );
     }
-    &:nth-child(3) .il-slider--content h3,
-    &:nth-child(3) .il-slider--content p.il-slider-description {
-      color: white;
-    }
-    &:nth-child(4):after {
-      @include backAfter;
+    &:nth-child(4) {
+      z-index: 11;
+      background: rgb(237, 236, 249);
       background: linear-gradient(
         90deg,
         rgba(237, 236, 249, 1) 0%,
@@ -87,54 +57,58 @@
         rgba(192, 233, 242, 1) 100%
       );
     }
-    &:nth-child(4) .il-slider--content h3,
-    &:nth-child(4) .il-slider--content p.il-slider-description {
-      color: white;
+    &.il-slider--hidden {
+      left: -200%;
+      z-index: -5;
     }
-    &:nth-child(5):after {
-      @include backAfter;
-      background: linear-gradient(
-        90deg,
-        rgb(175, 175, 30) 10%,
-        rgb(188, 189, 131) 22%,
-        rgb(133, 120, 55) 50%
-      );
-    }
-    &:nth-child(5) .il-slider--content h3,
-    &:nth-child(5) .il-slider--content p.il-slider-description {
-      color: white;
+    &:after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.4);
+      background-image: url('../assets/images/themes/grid-40.png');
+      background-position: center;
+      background-repeat: repeat;
+      opacity: 0.5;
     }
     .il-slider--content {
       width: 100%;
-      max-width: $maxGridWidth;
-      margin: auto;
-      padding: 0.5rem 1rem;
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
+      z-index: 6;
       h3 {
-        font-size: 2rem;
+        color: white;
+        text-align: center;
+        padding: 0;
+        margin: 0;
       }
-
       p.il-slider-description {
-        padding: 0.15rem 0;
-        //line-height: 1;
-        font-size: 0.89rem;
-
+        display: none;
+        color: white;
         @media (min-width: 680px) {
+          display: block;
           padding: 0.25rem 0;
-
-          font-size: 1rem;
+          line-height: 1.2;
+          font-size: 1.2rem;
         }
         @media (min-width: 800px) {
+          display: block;
           padding: 0.45rem 0;
-          font-size: 1.2rem;
+          line-height: 1.4;
+          font-size: 1.4rem;
+        }
+      }
+      .il-slider--buttom {
+        a {
+          text-align: center;
         }
       }
     }

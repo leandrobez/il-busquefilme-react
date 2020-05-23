@@ -48,12 +48,11 @@ class About extends Component {
         <div className="il-panel--content">
           <h1 className="il-panel--title">{item.title}</h1>
           <p className="il-panel--description">{item.description}</p>
-          <a
-            href="!#"
-            className="il-btn il-btn--slider il-background--color__red"
-          >
-            Saiba mais
-          </a>
+          <div className="il-panel--buttom">
+            <a href="!#" className="il-btn il-btn--slider">
+              Saiba mais
+            </a>
+          </div>
         </div>
       </div>
     ));

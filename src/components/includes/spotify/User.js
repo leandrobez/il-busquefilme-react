@@ -27,7 +27,6 @@ export default class User extends Component {
           this.setState({
             user: data.user
           });
-         
         }
       });
     }
@@ -35,7 +34,7 @@ export default class User extends Component {
 
   getAlbums = e => {
     e.preventDefault();
-    this.props.toggle()
+    this.props.toggle();
   };
 
   redirectLoginSpotify = () => {
@@ -44,6 +43,29 @@ export default class User extends Component {
     setTimeout(() => {
       window.open('/spotify/618355/superman', '_top', strWindowFeatures);
     }, 4000);
+  };
+
+  checkTracks = () => {
+    if (this.context.tracks()) {
+      return true;
+    }
+    return false;
+  };
+
+  getContainer = () => {
+    if (this.checkTracks()) {
+      return (
+        <>
+          <p>Clique no botão abaixo para ver a trilha sonora desse filme.</p>;
+          <button
+            className="il-btn il-btn--spotify"
+            onClick={e => this.getAlbums(e)}
+          >
+            Carregar lista
+          </button>
+        </>
+      );
+    }
   };
 
   render() {
@@ -65,13 +87,7 @@ export default class User extends Component {
               ? 'Olá ' + this.state.user.display_name + '!'
               : 'Olá visitante!'}
           </span>
-          <p>Clique no botão abaixo para ver a trilha sonora desse filme.</p>
-          <button
-            className="il-btn il-btn--spotify"
-            onClick={e => this.getAlbums(e)}
-          >
-            Carregar lista
-          </button>
+          {this.getContainer()}
         </div>
       </div>
     );

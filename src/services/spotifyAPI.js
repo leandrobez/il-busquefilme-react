@@ -7,7 +7,7 @@ dotenv.config();
 export const dashboard = () => {
   return {
     mail: 'suporte@internetlojas.com',
-    senha: '12AnAm1',
+    senha: process.env.REACT_APP_PWD_EMAIL,
     app_name: 'BusqueFilme',
     url_dashboard:
       'https://beta.developer.spotify.com/dashboard/applications/' +
@@ -19,7 +19,7 @@ export const getURL = () => {
   const scope = 'streaming user-read-private user-read-email',
     client = `client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&`,
     redirect = `redirect_uri=http://localhost:${
-      process.env.REACT_APP_HOST_PORT
+      process.env.REACT_APP_CLIENT_PORT
     }/spotify/callback&scope=${encodeURI(scope)}`;
   return `https://accounts.spotify.com/authorize/?${client}${redirect}`;
 };

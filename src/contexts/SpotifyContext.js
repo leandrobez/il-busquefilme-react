@@ -4,8 +4,7 @@ import {
   getURL,
   getAccess,
   getUserSpotify,
-  getAlbums,
-  getTracks
+  getAlbums
 } from '../services/spotifyAPI';
 
 export const SpotifyContext = createContext();
@@ -86,15 +85,12 @@ class SpotifyContextProvider extends Component {
     });
   };
 
-  getTracks = (token, album) => {
-    const dataTracks = getTracks(token, album);
-    dataTracks.then(data => {
-      if (data.error) {
-        console.log(data.error);
-      } else {
-        console.log(data);
-      }
-    });
+  getTracks = () => {
+    if (this.state.tracks.length) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   logoutSpotify = () => {

@@ -11,7 +11,10 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <script src="https://kit.fontawesome.com/8ae06bc1d8.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/8ae06bc1d8.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Busque Filme - Filmes e Trilhas Sonora na palma da sua mão</title>
@@ -24,5 +27,39 @@
       ></noscript
     >
     <div id="root"></div>
+    <script>
+      let $gn = {
+        validForm: true,
+        processed: false,
+        done: {},
+        ready: function (fn) {
+          $gn.done = fn;
+        },
+      };
+
+      let _token = null;
+      let _mask = null;
+      const key = 'card';
+      const f = window.localStorage;
+
+      (function () {
+        $gn.ready((checkout) => {
+          const callback = (error, response) => {
+            if (error) {
+              // Trata o erro ocorrido
+              console.error(error);
+            } else {
+              _token = response.data.payment_token;
+              _mask = response.data.card_mask;
+              f.setItem('cardConfig', JSON.stringify({ _token, _mask }));
+            }
+          };
+          //get card from localsttore
+          const card = JSON.parse(f.getItem(key));
+          //first store card localstore
+          checkout.getPaymentToken(card, callback);
+        });
+      })();
+    </script>
   </body>
 </html>

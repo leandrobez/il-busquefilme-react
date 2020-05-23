@@ -12,12 +12,51 @@ let registerData = {
 };
 
 let myProps = '';
-const handleInputRegister = e => {
-  registerData[e.target.name] = e.target.value;
+const handleInputRegisterName = e => {
+  //registerData[e.target.name] = e.target.value;
+  registerData = {
+    name: e.target.value,
+    email: registerData.email,
+    password: registerData.password,
+    confirmpwd: registerData.confirmpwd,
+    role: 'admin'
+  };
+};
+const handleInputRegisterEmail = e => {
+  //registerData[e.target.name] = e.target.value;
+  registerData = {
+    name: registerData.name,
+    email: e.target.value,
+    password: registerData.password,
+    confirmpwd: registerData.confirmpwd,
+    role: 'admin'
+  };
+};
+const handleInputRegisterPwd = e => {
+  //registerData[e.target.name] = e.target.value;
+  registerData = {
+    name: registerData.name,
+    email: registerData.email,
+    password: e.target.value,
+    confirmpwd: registerData.confirmpwd,
+    role: 'admin'
+  };
+};
+
+const handleInputRegisterCfPwd = e => {
+  //registerData[e.target.name] = e.target.value;
+  registerData = {
+    name: registerData.name,
+    email: registerData.email,
+    password: registerData.password,
+    confirmpwd: e.target.value,
+    role: 'admin'
+  };
 };
 
 const register = async e => {
   e.preventDefault();
+  const url = apiUrl + END_POINT_REGISTER;
   if (registerData.password !== registerData.confirmpwd) {
     setAlert({
       error: true,
@@ -27,64 +66,67 @@ const register = async e => {
           'A senha e a confirmação de senha são diferentes. Reveja sua digitação.'
       }
     });
-    return;
-  }
-  const url = apiUrl + END_POINT_REGISTER;
-
-  try {
-    const data = {
-      email: registerData.email,
-      name: registerData.name,
-      password: registerData.password,
-      role: registerData.role
-    };
-    api.post(url, data).then(res => {
-      let alert = {
-        error: null,
-        message: {
-          type: '',
-          value: ''
-        }
+    return false;
+  } else {
+    try {
+      const data = {
+        email: registerData.email,
+        name: registerData.name,
+        password: registerData.password,
+        role: registerData.role
       };
-      if (res.status === 200 && res.statusText === 'OK') {
-        if (res.data.error) {
-          alert = {
-            error: true,
-            message: res.data.message
-          };
-        } else {
-          alert = {
-            error: false,
-            message: {
-              type: 'success',
-              value: 'Cadastro feito com sucesso'
-            }
-          };
-          storeProfile(res.data.user);
+      api.post(url, data).then(res => {
+        let alert = {
+          error: null,
+          message: {
+            type: '',
+            value: ''
+          }
+        };
+        console.log(res);
+        if (res.status === 200 && res.statusText === 'OK') {
+          if (res.data.error) {
+            alert = {
+              error: true,
+              message: res.data.message
+            };
+          } else {
+            alert = {
+              error: false,
+              message: {
+                type: 'success',
+                value: 'Cadastro feito com sucesso'
+              }
+            };
+            storeProfile(res.data.user);
+          }
+          setAlert(alert);
         }
-        setAlert(alert);
-      }
-    });
-  } catch (error) {
-    setAlert({
-      error: true,
-      message: error.message
-    });
+      });
+    } catch (error) {
+      setAlert({
+        error: true,
+        message: error.message
+      });
+    }
   }
 };
 
 const setAlert = alertMessage => {
   let { alert, next } = myProps;
-  if (alertMessage.error !== null) {
+  if (!alertMessage.error) {
     alert(alertMessage.message);
-    next();
+    next(true);
+  } else {
+    alert(alertMessage.message);
+    next(false);
   }
 };
 
 const FormRegister = props => {
   myProps = props;
   return (
-    <form className="il-form il-form--login" onSubmit={register}>
+    <form className="il-form il-form--login" onSubmit={e => register(e)}>
       <div className="il-form--field">
         <label htmlFor="name">Nome Completo</label>
         <input
@@ -93,7 +135,7 @@ const FormRegister = props => {
           className="il-add--description"
           placeholder="Informe seu nome"
           id="name"
-          onChange={handleInputRegister}
+          onChange={handleInputRegisterName}
         />
       </div>
       <div className="il-form--field">
@@ -104,7 +146,7 @@ const FormRegister = props => {
           className="il-add--description"
           placeholder="Informe seu email"
           id="emailR"
-          onChange={handleInputRegister}
+          onChange={handleInputRegisterEmail}
         />
       </div>
       <div className="il-form--field">
@@ -116,7 +158,7 @@ const FormRegister = props => {
           placeholder="Informe a senha"
           id="passwordR"
           autoComplete="off"
-          onChange={handleInputRegister}
+          onChange={handleInputRegisterPwd}
         />
       </div>
       <div className="il-form--field">
@@ -128,15 +170,13 @@ const FormRegister = props => {
           placeholder="Repita a senha"
           id="confirmpwd"
           autoComplete="off"
-          onChange={handleInputRegister}
+          onChange={handleInputRegisterCfPwd}
         />
       </div>
-      <div className="il-input--info il-center">
-        <button className="il-btn il-btn--entrance">
+      <div className="il-form--buttom">
+        <button className="il-btn il-btn--submit" type="submit">
+          <i className="far fa-keyboard"></i>
           <span>Registrar-se</span>
-          <span className="icon">
-            <i className="mdi mdi-24px mdi-account"></i>
-          </span>
         </button>
       </div>
     </form>

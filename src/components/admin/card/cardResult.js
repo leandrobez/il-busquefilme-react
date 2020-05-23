@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import BtnDetail from '../includes/ButtonComponentDetail';
+//import BtnDetail from '../includes/ButtonComponentDetail';
 
-import { MoviesContext } from '../../contexts/MoviesContext';
+import { MoviesContext } from '../../../contexts/MoviesContext';
 
-class Cards extends Component {
+class CardResult extends Component {
   static contextType = MoviesContext;
   constructor(props) {
     super(props);
@@ -22,39 +22,28 @@ class Cards extends Component {
 
   setMovies = (config) => {
     this.setState({
-      config,
+      config: config,
     });
-
-    if (config.type !== 'choices') {
-      let url = this.context.requestUrlType(config),
-        movies = this.context.getMovies(url);
-      if (url) {
-        movies = this.context.getMovies(url);
-        movies.then((data) => {
-          if (data) {
-            let movies = data.results.filter((res) => res !== null);
-            this.setState({ movies: movies });
-            this.setStores(movies);
-          }
-        });
-      }
-    } else {
-      let dataMovies = [];
-      const urlCollection = this.context.requestUrlType(config);
-
-      if (urlCollection.length) {
-        for (let i = 0; i < urlCollection.length; i++) {
-          let movies = this.context.getMovies(urlCollection[i]);
-          movies.then((data) => {
-            if (!data.adult) {
-              dataMovies.push(data);
-            }
-            if (dataMovies.length) {
-              this.setState({ movies: dataMovies });
-              this.setStores(dataMovies);
+    ////let dataMovies = [];
+    //let dataResults = [];
+    const urlCollection = this.context.requestUrlType(config);
+    if (urlCollection.length) {
+      for (let i = 0; i < urlCollection.length; i++) {
+        //let movies = this.context.getMovies(urlCollection[i]);
+        console.log(config, urlCollection[i]);
+        /**movies.then((movie) => {
+          movie.results.forEach((element) => {
+            if (!element.adult) {
+              //dataMovies.push(element);
+              //let  = [];
+              dataResults.push(element);
             }
           });
-        }
+          
+          dataMovies.push({ index: i, data: dataResults });
+          dataResults = []
+        });
+        //dataMovies.push(results) */
       }
     }
   };
@@ -105,7 +94,6 @@ class Cards extends Component {
                 : `Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptatum sit ex amet rerum optio.`}
             </span>
           </div>
-          <BtnDetail key={'btndetail-' + movie.id} currentMovie={movie} />
         </div>
       ));
     };
@@ -119,4 +107,4 @@ class Cards extends Component {
   }
 }
 
-export default Cards;
+export default CardResult;

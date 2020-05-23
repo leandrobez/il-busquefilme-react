@@ -28,7 +28,7 @@ class Tracks extends Component {
         {
           label: 'Trilha',
 
-          width: '30%'
+          width: '45%'
         }
       ],
       albums: []
@@ -89,7 +89,7 @@ class Tracks extends Component {
             <ul> {artists(track.artists)}</ul>
           </td>
 
-          <td width="35%" className="il-color-texture--third">
+          <td width="45%" className="il-color-texture--third">
             <audio controls>
               <source
                 src="https://p.scdn.co/mp3-preview/3245f73297bdbbf55808e2fa3e1132464075c062?cid=774b29d4f13844c495f206cafdad9c86"
@@ -103,13 +103,13 @@ class Tracks extends Component {
     };
 
     return (
-      <div>
-        <table>
+      <div className="il-list">
+        <table className="il-spotify--list">
           <thead>
             <tr>{thead()}</tr>
           </thead>
         </table>
-        <table>
+        <table className="il-spotify--list">
           <tbody>
             {this.state.albums.length ? (
               trTracks()

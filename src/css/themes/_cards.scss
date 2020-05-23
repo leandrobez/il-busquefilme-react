@@ -10,8 +10,7 @@
     border-radius: 5px;
     background: $lightColor;
     position: relative;
-    min-height: $minHeightCard;
-    max-height: $minHeightCard;
+    height: $minHeightCard;
     .il-card--poster {
       position: absolute;
       width: $widthPoster;
@@ -22,7 +21,6 @@
     }
     .il-card--header {
       position: relative;
-      width: $widthPoster;
       top: 0;
       background: $lightColor;
       height: $heigthHeaderPoster;
@@ -31,6 +29,9 @@
         margin: 0;
         padding: 0;
         font-size: 0.75rem;
+        @media (min-width: 690px) {
+          font-size: 1rem;
+        }
         text-align: center;
         line-height: $heigthHeaderPoster;
         text-transform: uppercase;
@@ -42,9 +43,8 @@
       width: 100%;
       max-width: $widthPoster;
       padding: 0.5rem;
-      height: $heigthCardBody;
+      //height: $heigthCardBody;
       background: $primaryColor;
-
       &.il-body--transparent {
         background: transparent;
       }
@@ -55,6 +55,12 @@
         &.il-release,
         &.il-overview {
           font-size: 0.75rem;
+        }
+        &.il-release {
+          text-align: center;
+          padding: 0.3rem 0;
+          color: $lightColor;
+          font-size: 0.89rem;
         }
       }
     }

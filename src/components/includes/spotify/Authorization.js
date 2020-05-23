@@ -31,11 +31,12 @@ class Authorization extends Component {
         'menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes';
     window.open(url, '_top', strWindowFeatures);
   };
-
-  render() {
-    const userNotAuthenticated = (
+  user = () => {
+    const container = (
       <>
-        <h3>Olá usuário do spotify! Faça seu login para continuar</h3>
+        <h3 className="il-section--title il-text-color--light il-center">
+          Olá usuário do spotify! Faça seu login para continuar
+        </h3>
         <button
           className="il-btn il-btn--spotify"
           onClick={e => this.getUrl(e)}
@@ -44,16 +45,20 @@ class Authorization extends Component {
         </button>
       </>
     );
-    const userAuthenticated = (
-      <>
-        <h3>Já estou logado</h3>
-      </>
-    );
-    return (
-      <div className="il-spotify--button">
-        {this.state.isAuthenticated ? userAuthenticated : userNotAuthenticated}
-      </div>
-    );
+    if (!this.state.isAuthenticated) {
+      return container;
+    } else {
+      return (
+        <>
+          <h3 className="il-section--title il-text-color--light il-center">
+            Bem vindo
+          </h3>
+        </>
+      );
+    }
+  };
+  render() {
+    return <div className="il-spotify--button">{this.user()}</div>;
   }
 }
 

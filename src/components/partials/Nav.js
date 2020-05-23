@@ -37,116 +37,116 @@ class Nav extends Component {
       id: 28,
       name: 'Ação',
       icon: 'mdi mdi-ferry',
-      show: true
+      show: true,
     },
     {
       id: 12,
       name: 'Aventura',
       icon: 'mdi mdi-motorbike',
-      show: true
+      show: true,
     },
     {
       id: 16,
       name: 'Animação',
       icon: 'mdi mdi-castle',
-      show: true
+      show: true,
     },
     {
       id: 35,
       name: 'Comédia',
       icon: 'mdi mdi-castle',
-      show: false
+      show: false,
     },
     {
       id: 80,
       name: 'Crime',
       icon: 'mdi mdi-castle',
-      show: false
+      show: false,
     },
     {
       id: 99,
       name: 'Documentário',
       icon: 'mdi mdi-castle',
-      show: false
+      show: false,
     },
     {
       id: 18,
       name: 'Drama',
       icon: 'mdi mdi-emoticon-sad',
-      show: true
+      show: true,
     },
     {
       id: 10751,
       name: 'Família',
       icon: 'mdi mdi-heart-outline',
-      show: true
+      show: true,
     },
     {
       id: 14,
       name: 'Fantasia',
       icon: 'mdi mdi-panda',
-      show: true
+      show: true,
     },
     {
       id: 36,
       name: 'História',
       icon: 'mdi mdi-castle',
-      show: false
+      show: false,
     },
     {
       id: 27,
       name: 'Terror',
       icon: 'mdi mdi-castle',
-      show: false
+      show: false,
     },
     {
       id: 10402,
       name: 'Música',
       icon: 'mdi mdi-castle',
-      show: false
+      show: false,
     },
     {
       id: 9648,
       name: 'Mistério',
       icon: 'mdi mdi-snowman',
-      show: true
+      show: true,
     },
     {
       id: 10749,
       name: 'Romance',
       icon: 'mdi mdi-castle',
-      show: false
+      show: false,
     },
     {
       id: 878,
       name: 'Ficção',
       icon: 'mdi mdi-rocket',
-      show: true
+      show: true,
     },
     {
       id: 10770,
       name: 'TV',
       icon: 'mdi mdi-monitor',
-      show: true
+      show: true,
     },
     {
       id: 53,
       name: 'Thriller',
       icon: 'mdi mdi-timer',
-      show: true
+      show: true,
     },
     {
       id: 10752,
       name: 'Guerra',
       icon: 'mdi mdi-sword',
-      show: true
+      show: true,
     },
     {
       id: 37,
       name: 'Faroeste',
       icon: 'mdi mdi- mdi-star-outline',
-      show: true
-    }
+      show: true,
+    },
   ];
 
   genres = () => {
@@ -154,7 +154,7 @@ class Nav extends Component {
       <li className="il-menu--item" key={'genre-' + index}>
         <span>
           <Link
-            onClick={e => this.genreClosePanel(e, index)}
+            onClick={(e) => this.genreClosePanel(e, index)}
             to={'/genres/' + genre.id}
           >
             {genre.name}

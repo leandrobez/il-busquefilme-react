@@ -1,7 +1,7 @@
 
 const urlBase = 'https://api.themoviedb.org/3/';
 const config = {
-  appKey: 'ae7d8e0f917f5c0bcc1e8de4935e7ece',
+  appKey: process.env.REACT_APP_MOVIEDB_KEY,
   language: 'pt-BR',
   url: {
     find: urlBase + 'find/',

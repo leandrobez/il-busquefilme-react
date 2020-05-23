@@ -14,7 +14,10 @@ export const storeLogin = token => {
 export const storeProfile = user => {
   const store = window.localStorage,
     stfy = JSON.stringify;
-  store.setItem(USER_KEY, stfy({ id: user.id, name: user.name }));
+  store.setItem(
+    USER_KEY,
+    stfy({ id: user.id, name: user.name, email: user.email })
+  );
 };
 
 export const storeLogout = () => {

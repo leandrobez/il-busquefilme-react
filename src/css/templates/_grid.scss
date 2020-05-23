@@ -6,7 +6,6 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: $headerHeightMobile $sliderHeightMobile auto 150px;
-
     @media screen and (min-width: 680px) {
       grid-template-rows: $headerHeightDesktop $sliderHeightDesktop auto 150px;
     }

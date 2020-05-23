@@ -15,7 +15,6 @@
       0 6px 50px rgba(34, 34, 34, 0.23);
     border-radius: 7px;
     transition: 450ms ease-in-out;
-
     background: $lightColor;
     .il-panel--img {
       position: relative;
@@ -28,7 +27,6 @@
         margin: 0 auto;
         position: relative;
         top: 5px;
-
         & img {
           width: 100%;
           color: white;
@@ -58,6 +56,10 @@
       margin: 0 auto;
       line-height: 1.3rem;
       color: #332341;
+    }
+    .il-panel--buttom {
+      text-align: center;
+      padding: 0.4rem 0;
     }
   }
 }

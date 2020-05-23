@@ -10,18 +10,24 @@ class SliderBanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: ''
+      location: '',
     };
   }
 
   getComponent = () => {
     const page = this.props.location.pathname,
-      { slider } = this.context,
+      { authorize, slider } = this.context,
       path = '/details';
+      let show = false
     if (page && page.search(path) !== -1) {
-      return <Banner />;
+      show = authorize(false);
+    } else {
+      show = authorize(true);
     }
-    return <Slider data={slider} />;
+    if(show){
+      return <Slider data={slider} />
+    }
+    return <Banner />
   };
 
   render() {

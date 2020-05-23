@@ -7,19 +7,20 @@ class MoviesContextProvider extends Component {
   state = {
     load: false,
     movies: [],
-    pagination: []
+    pagination: [],
   };
 
   toggleLoad = () => {
     this.setState({
-      load: !this.state.load
+      load: !this.state.load,
     });
   };
 
-  getUrlRequestType = config => {
+  getUrlRequestType = (config) => {
     let url = null,
       id = null,
-      choices = null;
+      choices = null,
+      searchs = null;
     //break config
     const type = config.type;
     switch (type) {
@@ -33,6 +34,18 @@ class MoviesContextProvider extends Component {
       case 'choices':
         choices = config.choices;
         url = requestAPI.urlChoices(choices);
+        break;
+      case 'searchs':
+        let urlCollection = [];
+        let urlItem = null;
+        searchs = config.searchs;
+        searchs.forEach((element) => {
+          if (element.item) {
+            urlItem = requestAPI.urlSearchs(element.item);
+            urlCollection.push(urlItem);
+          }
+        });
+        url = urlCollection;
         break;
       case 'search':
         const key = 'word-param',
@@ -61,16 +74,17 @@ class MoviesContextProvider extends Component {
     return url;
   };
 
-  getMovies = url => {
-    return requestAPI.getMovies(url).then(res => {
+  getMovies = (url) => {
+    return requestAPI.getMovies(url).then((res) => {
       this.setState({
-        load: false
+        load: false,
       });
-      return res
+      
+      return res;
     });
   };
 
-  getBackground = path => {
+  getBackground = (path) => {
     const urlBase = 'http://image.tmdb.org/t/p/w300';
     if (path) {
       return { backgroundImage: 'url(' + urlBase + path + ')' };
@@ -79,19 +93,19 @@ class MoviesContextProvider extends Component {
     }
   };
 
-  setStores = movies => {
+  setStores = (movies) => {
     const storeKey = 'movies',
       storage = window.localStorage,
       stfy = JSON.stringify;
     storage.setItem(storeKey, stfy(movies));
   };
 
-  getDetails = id => {
+  getDetails = (id) => {
     const storeKey = 'movies',
       storage = window.localStorage,
       parse = JSON.parse,
       movies = parse(storage.getItem(storeKey));
-    return movies.find(movie => movie.id === +id);
+    return movies.find((movie) => movie.id === +id);
   };
 
   render() {
@@ -105,7 +119,7 @@ class MoviesContextProvider extends Component {
           getMovies: this.getMovies,
           getBack: this.getBackground,
           setStores: this.setStores,
-          detail: this.getDetails
+          detail: this.getDetails,
         }}
       >
         {this.props.children}

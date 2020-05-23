@@ -7,6 +7,7 @@ form.il-form {
   input[type='password'],
   input[type='date'],
   input[type='number'],
+  input[type='phone'],
   select.il-select {
     width: 100%;
     height: 40px;
@@ -19,7 +20,8 @@ form.il-form {
     border: 1px solid #996a54;
     border-radius: 3px;
   }
-  .il-form--field {
+  .il-form--field,
+  .il-form--buttom {
     padding: 0.25rem;
     margin: auto;
     &.il-flex {
@@ -28,6 +30,27 @@ form.il-form {
     }
     .il-card--button {
       margin-left: 0.35rem;
+    }
+  }
+  .il-form--buttom {
+    padding: 0.4rem 0;
+    text-align: center;
+    button {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      min-width: 250px;
+      margin: 0 auto;
+      span {
+        display: block;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+      }
+      i {
+        font-size: 1rem;
+        display: block;
+        line-height: 1rem;
+      }
     }
   }
 }

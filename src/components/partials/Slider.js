@@ -7,82 +7,62 @@ class Slider extends Component {
       count: 0,
       styles: {
         styleOpacity: 0.7,
-        styleLeft: '-150%'
-      }
+        styleLeft: '-150%',
+      },
     };
-    this.start = this.start.bind(this);
   }
-
-  run = () => {
-    const sliders = this.props.data,
-      countSlider = sliders.length,
-      allSlider = document.querySelectorAll('.il-sliders--item'),
-      sliderChild = document.querySelectorAll(
-        '.il-sliders--item .il-slider--img'
-      ),
-      path = '/images/sliders/';
-    this.setState({
-      count: countSlider
-    });
-    for (let i = 0; i < countSlider; i++) {
-      if (i > 0) {
-        allSlider[i].style.opacity = this.state.styles.styleOpacity;
-        allSlider[i].style.left = this.state.styles.styleLeft;
-        sliderChild[i].style.backgroundImage =
-          'url(' + path + sliders[i].img + ')';
-      } else {
-        allSlider[0].style.opacity = 1;
-        allSlider[0].style.left = 0;
-        sliderChild[0].style.backgroundImage =
-          "url('" + path + sliders[0].img + "')";
-      }
-    }
-  };
-
-  move = current => {
-    let allSlider = document.querySelectorAll('.il-sliders--item'),
-      sliderActive = allSlider[current];
-    sliderActive.style.left = 0;
-    sliderActive.style.opacity = 1;
-    if (current > 0) {
-      allSlider[current - 1].style.opacity = this.state.styles.styleOpacity;
-      allSlider[current - 1].style.left = this.state.styles.styleLeft;
-    } else {
-      allSlider[
-        this.state.count - 1
-      ].style.opacity = this.state.styles.styleOpacity;
-      allSlider[this.state.count - 1].style.left = this.state.styles.styleLeft;
-    }
-  };
-
-  start = () => {
-    let currentSlider = 0;
-    this.run();
-    setInterval(() => {
-      this.move(currentSlider);
-      currentSlider++;
-      if (currentSlider === this.state.count) {
-        currentSlider = 0;
-      }
-    }, 5000);
-  };
 
   componentDidMount() {
-    this.start();
+    const allSlider = document.querySelectorAll('.il-sliders--item');
+    if (allSlider && allSlider[0].classList.contains('il-slider--hidden')) {
+      allSlider[0].classList.remove('il-slider--hidden');
+      this.startSlider();
+    } else {
+      allSlider[0].classList.add('il-slider--hidden');
+      this.startSlider();
+    }
   }
 
+  startSlider = () => {
+    const allSlider = document.querySelectorAll('.il-sliders--item');
+    //time out each slider
+    let sliderTime = 10000;
+    let init = 0;
+
+    const sliderRun = () => {
+      allSlider[init].classList.add('il-slider--hidden');
+      init++;
+      allSlider[init].classList.remove('il-slider--hidden');
+      if (init === 3) {
+        clearInterval(time);
+        setTimeout(() => {
+          allSlider[0].classList.remove('il-slider--hidden');
+          allSlider[init].classList.add('il-slider--hidden');
+          this.startSlider();
+        }, sliderTime);
+      }
+    };
+
+    let time = setInterval(() => {
+      sliderRun();
+    }, sliderTime);
+  };
+
   render() {
-    const sliderItem = this.props.data.map(item => (
+    const sliderItem = this.props.data.map((item) => (
       <div className="il-sliders--item" key={'slider-' + item.id}>
-        <div className="il-slider--img"></div>
-        <div className="il-slider--content">
-          <h3>{item.title}</h3>
-          <p className="il-slider-description il-color-text--light">
-            {item.description}
-          </p>
-          <a href="!#" className="il-btn il-btn--slider il-btn--light">
-            Saiba mais
-          </a>
+        <div className="il-container--wrapper">
+          <div className="il-slider--content">
+            <h3>{item.title}</h3>
+            <p className="il-slider-description il-color-text--light">
+              {item.description}
+            </p>
+            <div className="il-slider--buttom">
+              <a href="!#" className="il-btn il-btn--slider">
+                Saiba mais
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     ));

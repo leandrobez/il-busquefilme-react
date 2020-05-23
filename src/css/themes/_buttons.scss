@@ -10,7 +10,10 @@ button.il-btn {
   border: 1px solid $primaryColor;
   &.il-btn--search,
   &.il-btn--card,
-  &.il-btn--spotify {
+  &.il-btn--spotify,
+  &.il-btn--slider,
+  &.il-btn--plan,
+  &.il-btn--submit {
     cursor: pointer;
     max-width: 100px;
     margin-left: 0.4rem;
@@ -26,8 +29,28 @@ button.il-btn {
   &.il-btn--card {
     border: none;
   }
-  &.il-btn--spotify {
+  &.il-btn--spotify,
+  &.il-btn--plan {
     max-width: 210px;
+  }
+  &.il-btn--plan {
+    background: $thirtyColor;
+    color: $lightColor;
+    transition: all 450ms ease-in;
+    border: none;
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+  &.il-btn--slider {
+    max-width: 250px;
+    line-height: 32px;
+    border: none;
+    background: $secondColor;
+    transition: all 450ms ease-in;
+    &:hover {
+      transform: scale(0.95);
+    }
   }
   &.il-btn--small {
     max-width: 150px;
