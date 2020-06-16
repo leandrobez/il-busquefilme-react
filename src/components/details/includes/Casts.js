@@ -10,21 +10,21 @@ class Casts extends Component {
     this.state = {
       config: {
         id: '',
-        type: ''
+        type: '',
       },
-      casts: null
+      casts: null,
     };
   }
 
-  setCasts = config => {
+  setCasts = (config) => {
     this.setState({
-      config
+      config,
     });
     let url = this.context.requestUrlType(config);
     const casts = this.context.getMovies(url);
-    casts.then(data => {
+    casts.then((data) => {
       this.setState({
-        casts: data.cast
+        casts: data.cast,
       });
     });
   };
@@ -38,7 +38,7 @@ class Casts extends Component {
     const casts = this.state.casts;
     if (casts && casts.length > 6) {
       let items = casts.slice(0, 6);
-      return items.map(list => (
+      return items.map((list) => (
         <div className="il-card--item" key={'casts-' + list.cast_id}>
           <div
             className="il-card--poster"

@@ -8,7 +8,7 @@ class Videos extends Component {
     this.setVideos = this.setVideos.bind(this);
   }
 
-  getBackground = path => {
+  getBackground = (path) => {
     const urlBase = 'http://image.tmdb.org/t/p/original';
     if (path) {
       return { backgroundImage: 'url(' + urlBase + path + ')' };
@@ -16,7 +16,7 @@ class Videos extends Component {
       return { backgroundColor: '#870a66' };
     }
   };
-  player = key => {
+  player = (key) => {
     let video = this.videos[key];
     this.iframeVideo = (
       <iframe
@@ -33,7 +33,6 @@ class Videos extends Component {
     this.videos = this.props.listVideos;
     if (this.videos && this.videos.length) {
       let items = this.videos;
-      //console.log(items);
       if (items.length) {
         return items.map((item, index) => (
           <div className="il-card--item" key={'video-' + item.id}>
@@ -45,7 +44,9 @@ class Videos extends Component {
               <h4>{item.name}</h4>
             </div>
             <div className="il-card--body il-body--transparent">
-              <p className="il-text-color--light il-center">Disponível em: {item.site}</p>
+              <p className="il-text-color--light il-center">
+                Disponível em: {item.site}
+              </p>
             </div>
             <div className="il-card--button">
               <button

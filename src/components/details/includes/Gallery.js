@@ -10,20 +10,20 @@ class Gallery extends Component {
     this.state = {
       config: {
         id: '',
-        type: ''
+        type: '',
       },
-      galleries: null
+      galleries: null,
     };
   }
-  setGalleries = config => {
+  setGalleries = (config) => {
     this.setState({
-      config
+      config,
     });
     let url = this.context.requestUrlType(config);
     const galleries = this.context.getMovies(url);
-    galleries.then(data => {
+    galleries.then((data) => {
       this.setState({
-        galleries: data
+        galleries: data,
       });
     });
   };
@@ -32,7 +32,7 @@ class Gallery extends Component {
     this.setGalleries(config);
   };
 
-  getWallpapers = type => {
+  getWallpapers = (type) => {
     let portfolio = '';
     if (this.state.galleries) {
       const { backdrops } = this.state.galleries;
@@ -56,7 +56,7 @@ class Gallery extends Component {
     }
     return portfolio;
   };
-  getPosters = type => {
+  getPosters = (type) => {
     let portfolio = '';
 
     if (this.state.galleries) {

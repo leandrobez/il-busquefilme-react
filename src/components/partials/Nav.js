@@ -192,7 +192,8 @@ class Nav extends Component {
     const { showPanel } = this.context;
     const menu = (
       <div className="il-main--menu">
-        <h3 className="il-text-color--dark">Menu</h3>
+        {/* 
+        <h3 className="il-text-color--dark">Menu</h3> */}
         <ul className="il-menu">
           <li className="il-menu--item">
             <span>

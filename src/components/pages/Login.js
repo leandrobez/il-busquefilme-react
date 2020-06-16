@@ -4,6 +4,8 @@ import FormLogin from './forms/FormLogin';
 import FormRegister from './forms/FormRegister';
 import Alert from '../includes/Alert';
 
+import UserRegisterContextProvider from '../../contexts/UserRegisterContext';
+
 const dotenv = require('dotenv');
 
 //initialize dotenev
@@ -60,12 +62,12 @@ class Login extends Component {
     });
   };
 
-  next = (change) => {
+  next = (change, local) => {
     if (change) {
       setTimeout(() => {
         const strWindowFeatures =
           'menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes';
-        window.open('/', '_top', strWindowFeatures);
+        window.open('/' + local, '_top', strWindowFeatures);
       }, 4000);
     }
   };
@@ -75,7 +77,7 @@ class Login extends Component {
       <section className="il-section">
         <h2 className="il-section--title il-text-color--medium-dark">
           <i className="fas fa-sign-in-alt"></i>
-          <span>Access Your Account</span>
+          <span>Sua Conta</span>
         </h2>
 
         <div className="il-account">
@@ -124,8 +126,10 @@ class Login extends Component {
                   : 'il-register il-hidden'
               }
             >
-              <h4>Sem conta ainda? Crie agora</h4>
-              <FormRegister alert={this.setAlert} next={this.next} />
+              <h4>Sem conta ainda? Crie uma agora</h4>
+              <UserRegisterContextProvider>
+                <FormRegister alert={this.setAlert} next={this.next} />
+              </UserRegisterContextProvider>
             </div>
           </nav>
         </div>

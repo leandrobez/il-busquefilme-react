@@ -11,22 +11,22 @@ export default class Modals extends Component {
       id: null,
       showCasts: false,
       showGallery: false,
-      showTrailer: false
+      showTrailer: false,
     };
   }
 
   componentDidMount = () => {
     this.setState({
-      id: this.props.id
+      id: this.props.id,
     });
   };
 
-  close = e => {
+  close = (e) => {
     e.preventDefault();
     this.setState({
       showCasts: false,
       showGallery: false,
-      showTrailer: false
+      showTrailer: false,
     });
     const btnClose = document.getElementById('il-close-modal');
     btnClose.classList.remove('show');
@@ -43,28 +43,28 @@ export default class Modals extends Component {
         this.setState({
           showCasts: true,
           showGallery: false,
-          showTrailer: false
+          showTrailer: false,
         });
         break;
       case 'gallery':
         this.setState({
           showCasts: false,
           showGallery: true,
-          showTrailer: false
+          showTrailer: false,
         });
         break;
       case 'trailers':
         this.setState({
           showCasts: false,
           showGallery: false,
-          showTrailer: true
+          showTrailer: true,
         });
         break;
       default:
         this.setState({
           showCasts: false,
           showGallery: false,
-          showTrailer: false
+          showTrailer: false,
         });
 
         break;
@@ -79,7 +79,7 @@ export default class Modals extends Component {
           <div className="il-buttom--item">
             <button
               className="il-btn il-btn--small"
-              onClick={e => this.showModal(e, 'casts')}
+              onClick={(e) => this.showModal(e, 'casts')}
             >
               casts
             </button>
@@ -87,7 +87,7 @@ export default class Modals extends Component {
           <div className="il-buttom--item">
             <button
               className="il-btn il-btn--small"
-              onClick={e => this.showModal(e, 'gallery')}
+              onClick={(e) => this.showModal(e, 'gallery')}
             >
               gallery
             </button>
@@ -95,7 +95,7 @@ export default class Modals extends Component {
           <div className="il-buttom--item">
             <button
               className="il-btn il-btn--small"
-              onClick={e => this.showModal(e, 'trailers')}
+              onClick={(e) => this.showModal(e, 'trailers')}
             >
               trailers
             </button>
@@ -105,7 +105,7 @@ export default class Modals extends Component {
           href="#!"
           id="il-close-modal"
           className="il-btn--close"
-          onClick={e => this.close(e)}
+          onClick={(e) => this.close(e)}
         >
           X
         </a>

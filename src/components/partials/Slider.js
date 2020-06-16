@@ -58,7 +58,10 @@ class Slider extends Component {
               {item.description}
             </p>
             <div className="il-slider--buttom">
-              <a href="!#" className="il-btn il-btn--slider">
+              <a
+                href="!#"
+                className="il-btn il-btn--plan il-background--color__gradient"
+              >
                 Saiba mais
               </a>
             </div>

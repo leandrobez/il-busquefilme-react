@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: []
-    };
-  }
-  componentDidMount() {
-    const movies = JSON.parse(window.localStorage.getItem('movies'));
-    this.setState({
-      movies: movies
-    });
-  }
   render() {
     return (
       <section className="il-section">
@@ -42,7 +30,6 @@ class Home extends Component {
           Ufa! Isso só aqui no{' '}
           <b className="il-text-color--gold">BusqueFilme</b>.
         </p>
-        {this.cards}
       </section>
     );
   }

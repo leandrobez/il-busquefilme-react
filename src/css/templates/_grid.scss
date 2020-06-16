@@ -1,31 +1,36 @@
 .il-app {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   .il-container {
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: $headerHeightMobile $sliderHeightMobile auto 150px;
+    grid-template-rows: $headerHeightMobile $sliderHeightMobile 1fr 150px;
+    justify-content: space-between;
     @media screen and (min-width: 680px) {
-      grid-template-rows: $headerHeightDesktop $sliderHeightDesktop auto 150px;
+      grid-template-rows: $headerHeightDesktop $sliderHeightDesktop 1fr 150px;
     }
   }
+  .il-container--wrapper {
+    max-width: $maxGridWidth;
+    padding: 0 $gridPadd;
+    margin: auto;
+    @media screen and (min-width: 361px) and (max-width: 480px) {
+      width: 96%;
+    }
+    @media screen and (min-width: 481px) and (max-width: 680px) {
+      width: 94%;
+    }
+    @media screen and (min-width: 681px) and (max-width: 800px) {
+      width: 92%;
+    }
+    @media screen and (min-width: 801px) {
+      width: 90%;
+    }
+  }
+  main.il-main {
+    height: auto;
+    
+  }
 }
-main.il-main,
-.il-container--wrapper {
-  max-width: $maxGridWidth;
-  padding: 0 $gridPadd;
-  margin: auto;
-  @media screen and (min-width: 361px) and (max-width: 480px) {
-    width: 96%;
-  }
-  @media screen and (min-width: 481px) and (max-width: 680px) {
-    width: 94%;
-  }
-  @media screen and (min-width: 681px) and (max-width: 800px) {
-    width: 92%;
-  }
-  @media screen and (min-width: 801px) {
-    width: 90%;
-  }
-}
+

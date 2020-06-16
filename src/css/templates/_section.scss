@@ -3,5 +3,8 @@ section {
   &.il-section {
     padding: 0 0.4rem;
     position: relative;
+    &.il-section--error {
+      display: none;
+    }
   }
 }

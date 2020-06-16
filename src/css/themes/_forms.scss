@@ -22,11 +22,15 @@ form.il-form {
   }
   .il-form--field,
   .il-form--buttom {
-    padding: 0.25rem;
+    width: 100%;
+    padding: 0.25rem 0;
     margin: auto;
     &.il-flex {
       display: flex;
       justify-content: center;
+      & > div {
+        flex: 1;
+      }
     }
     .il-card--button {
       margin-left: 0.35rem;
@@ -50,6 +54,7 @@ form.il-form {
         font-size: 1rem;
         display: block;
         line-height: 1rem;
+        margin: auto 0;
       }
     }
   }

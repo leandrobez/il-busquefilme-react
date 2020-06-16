@@ -16,14 +16,13 @@ import Footer from './components/partials/Footer';
 import SliderBanner from './components/includes/SliderBanner';
 
 /**main components */
-//import Content from './components/Content';
 import Pages from './components/Pages';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggleMenu: false
+      toggleMenu: false,
     };
     this.setToggleMenu = this.setToggleMenu.bind(this);
   }
@@ -31,7 +30,7 @@ class App extends Component {
   setToggleMenu = () => {
     const toggle = this.state.toggle;
     this.setState({
-      toggleMenu: !toggle
+      toggleMenu: !toggle,
     });
   };
 

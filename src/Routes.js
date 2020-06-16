@@ -15,6 +15,7 @@ import Callback from './components/pages/Callback';
 import SearchResult from './components/pages/SearchResult';
 import Login from './components/pages/Login';
 import Plans from './components/pages/Plans';
+import Account from './components/pages/Account';
 import Error from './components/pages/Error';
 
 //ADMIN
@@ -28,9 +29,19 @@ const routes = [
     page: Home,
   },
   {
+    path: '/home',
+    exact: true,
+    page: Home,
+  },
+  {
     path: '/about',
     exact: true,
     page: About,
+  },
+  {
+    path: '/register/account',
+    exact: true,
+    page: Account,
   },
   {
     path: '/contact',

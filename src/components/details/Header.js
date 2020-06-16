@@ -7,51 +7,16 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      banner: {}
+      banner: {},
     };
   }
 
   componentDidMount = () => {
     let banner = this.context.detail(this.props.id);
     this.setState({
-      banner
+      banner,
     });
   };
-
-  /**
-  * 
-   getBack = () => {
-    const storeKey = 'details',
-    storage = window.localStorage,
-    parse = JSON.parse,
-    details = parse(storage.getItem(storeKey));
-    const urlBase = 'http://image.tmdb.org/t/p/original';
-
-    if (details && details.backdrop_path) {
-      return {
-        backgroundImage:
-          'url(' + urlBase + details.backdrop_path + ')'
-      };
-    } else {
-      return {
-        backgroundImage: "url('/images/banners/no-slider.jpg')"
-      };
-    }
-  };
-  
-
-  getDetails = () => {
-    const storeKey = 'details',
-      storage = window.localStorage,
-      parse = JSON.parse;
-    let details = parse(storage.getItem(storeKey));
-    if (details) {
-      return details;
-    } else {
-      return <div className="il-banner">sem nada</div>;
-    }
-  };
-*/
 
   render() {
     const banner = (

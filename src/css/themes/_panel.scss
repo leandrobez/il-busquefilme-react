@@ -27,10 +27,17 @@
         margin: 0 auto;
         position: relative;
         top: 5px;
-        & img {
-          width: 100%;
+        i {
+          height: 100%;
+          display: block;
+          margin: auto;
+          font-size: 2rem;
           color: white;
         }
+        /* & img {
+          width: 100%;
+          color: white;
+        } */
       }
     }
   }

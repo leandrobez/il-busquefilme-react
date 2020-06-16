@@ -6,44 +6,44 @@ import {
   END_POINT_LOGIN,
   storeLogin,
   storeProfile,
-  isAuthenticated
+  isAuthenticated,
 } from '../../../services/auth';
 
 let loginData = { email: '', password: '' };
 
 let myProps = '';
-const handleInputLoginEmail = e => {
+const handleInputLoginEmail = (e) => {
   loginData = {
     email: e.target.value,
-    password: loginData.password
+    password: loginData.password,
   };
 };
 
-const handleInputLoginPwd = e => {
+const handleInputLoginPwd = (e) => {
   loginData = {
     email: loginData.email,
-    password: e.target.value
+    password: e.target.value,
   };
 };
 
-const login = async e => {
+const login = async (e) => {
   e.preventDefault();
   const url = apiUrl + END_POINT_LOGIN;
 
   try {
-    api.post(url, loginData).then(res => {
+    api.post(url, loginData).then((res) => {
       let alert = {
         error: null,
         message: {
           type: '',
-          value: ''
-        }
+          value: '',
+        },
       };
       if (res.status === 200 && res.statusText === 'OK') {
         if (res.data.error) {
           alert = {
             error: true,
-            message: res.data.message
+            message: res.data.message,
           };
         } else {
           alert = {
@@ -51,8 +51,8 @@ const login = async e => {
             message: {
               type: 'success',
               value:
-                'Seu login foi feito com sucesso. Você será direcionado em 4s.'
-            }
+                'Seu login foi feito com sucesso. Você será direcionado em 4s.',
+            },
           };
           storeLogin(res.data.user.token);
           storeProfile(res.data.user);
@@ -65,23 +65,23 @@ const login = async e => {
   } catch (error) {
     setAlert({
       error: true,
-      message: error.message
+      message: error.message,
     });
   }
 };
 
-const setAlert = alertMessage => {
+const setAlert = (alertMessage) => {
   let { alert, next } = myProps;
   if (!alertMessage.error) {
     alert(alertMessage.message);
-    next(true);
+    next(true, 'home');
   } else {
     alert(alertMessage.message);
-    next(false);
+    next(false, '');
   }
 };
 
-const FormLogin = props => {
+const FormLogin = (props) => {
   myProps = props;
   return (
     <form className="il-form il-form--login" onSubmit={login}>
@@ -109,7 +109,10 @@ const FormLogin = props => {
         />
       </div>
       <div className="il-form--buttom">
-        <button className="il-btn il-btn--submit" type="submit">
+        <button
+          className="il-btn il-btn--plan il-background--color__gradient"
+          type="submit"
+        >
           <i className="fas fa-key"></i>
           <span>Logar</span>
         </button>

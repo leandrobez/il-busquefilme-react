@@ -9,15 +9,15 @@ export default class Overviews extends Component {
     this.state = {
       config: {
         id: '',
-        type: ''
+        type: '',
       },
       details: {
         overview: '',
         genres: [],
         companies: [],
         external_ids: {},
-        homepage: ''
-      }
+        homepage: '',
+      },
     };
   }
 
@@ -25,13 +25,13 @@ export default class Overviews extends Component {
     this.context.toggle();
   };
 
-  setOverview = config => {
+  setOverview = (config) => {
     this.setState({
-      config
+      config,
     });
     let url = this.context.requestUrlType(config);
     const movies = this.context.getMovies(url);
-    movies.then(data => {
+    movies.then((data) => {
       if (data) {
         this.setState({
           details: {
@@ -39,8 +39,8 @@ export default class Overviews extends Component {
             genres: data.genres,
             companies: data.production_companies,
             external_ids: data.external_ids,
-            homepage: data.homepage
-          }
+            homepage: data.homepage,
+          },
         });
       }
     });
@@ -53,7 +53,7 @@ export default class Overviews extends Component {
   };
 
   render() {
-    const getLogoCompany = path => {
+    const getLogoCompany = (path) => {
         const url = 'http://image.tmdb.org/t/p/w92';
         if (path) {
           return <img src={url + path} alt="" />;
@@ -66,7 +66,7 @@ export default class Overviews extends Component {
           <h3>Carregando...</h3>
         </div>
       ),
-      ExternalIDs = obj => {
+      ExternalIDs = (obj) => {
         let keys = Object.keys(obj);
         return keys.map((key_, index) =>
           obj[key_] !== null ? (
@@ -108,7 +108,7 @@ export default class Overviews extends Component {
         <div className="il-detail--genre">
           <h5 className="il-text-color--salmon il-center">Genres</h5>
           <ul className="il-genres">
-            {this.state.details.genres.map(genre => (
+            {this.state.details.genres.map((genre) => (
               <li key={'genre-' + genre.id}>
                 <span>{genre.name}</span>
               </li>
@@ -118,7 +118,7 @@ export default class Overviews extends Component {
         <div className="il-detail--company">
           <h5 className="il-text-color--salmon il-center">Companies</h5>
           <ul className="il-company">
-            {this.state.details.companies.map(company => (
+            {this.state.details.companies.map((company) => (
               <li key={'company-' + company.id}>
                 <span key={'logo-' + company.id}>
                   {getLogoCompany(company.logo_path)}

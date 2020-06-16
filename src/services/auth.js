@@ -32,3 +32,9 @@ export const getUserAuthenticated = () => {
 
   return isAuthenticated() ? parse(store.getItem(USER_KEY)) : null;
 };
+
+export const getUser = () => {
+  const store = window.localStorage,
+    parse = JSON.parse;
+  return parse(store.getItem(USER_KEY));
+};

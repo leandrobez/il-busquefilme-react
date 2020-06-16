@@ -25,32 +25,37 @@ class Contact extends Component {
           </div>
           <div className="il-contact--form">
             <h4 className="il-text-color--light">Envie uma mensagem</h4>
-            <form>
-              <p>
-                <label>Nome</label>
+            <form className="il-form il-form--login">
+              <div className="il-form--field">
+                <label className="il-text-color--light">Nome</label>
                 <input type="text" name="name" />
-              </p>
-              <p>
-                <label>Empresa</label>
+              </div>
+              <div className="il-form--field">
+                <label className="il-text-color--light">Empresa</label>
                 <input type="text" name="corpore" />
-              </p>
-              <p>
-                <label>Email</label>
+              </div>
+              <div className="il-form--field">
+                <label className="il-text-color--light">Email</label>
                 <input type="email" nome="email" />
-              </p>
-              <p>
-                <label>Fone</label>
+              </div>
+              <div className="il-form--field">
+                <label className="il-text-color--light">Fone</label>
                 <input type="text" name="phone" maxLength="15" />
-              </p>
-              <p className="full">
-                <label>Mensagem</label>
+              </div>
+              <div className="il-form--field">
+                <label className="il-text-color--light">Mensagem</label>
                 <textarea rows="5" name="mensagem"></textarea>
-              </p>
-              <p className="full">
-                <button type="submit" name="enviar">
-                  Enviar
+              </div>
+              <div className="il-form--buttom">
+                <button
+                  type="submit"
+                  name="enviar"
+                  className="il-btn il-btn--plan il-background--color__gradient"
+                >
+                  <i className="far fa-keyboard"></i>
+                  <span>Enviar</span>
                 </button>
-              </p>
+              </div>
             </form>
           </div>
         </div>

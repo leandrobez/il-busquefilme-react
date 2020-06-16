@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { GerencianetContext } from '../../../contexts/GerencianetContext';
 
-class UserRegister extends Component {
-  static contextType = GerencianetContext;
+import { UserAddress } from '../../../services/CorreiosService';
+
+export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: {},
       register: {
         repeats: 3,
-        name: '',
-        email: '',
-        cpf: '',
-        birth: '',
+        name: this.props.currentUser.name,
+        email: this.props.currentUser.email,
+        cpf: '70334641772',
+        birth: '1961-06-26',
         phone_number: '',
         pay: 'banking_billet',
         address: {
           street: '',
-          number: '',
-          complement: '',
+          number: '1248',
+          complement: 'Casa 5',
           neighborhood: '',
           zipcode: '',
           city: '',
@@ -27,52 +28,38 @@ class UserRegister extends Component {
     };
   }
 
+  componentDidUpdate = () => {
+    /* let dataRegister = this.state.register;
+    dataRegister.name = this.props.currentUser.name;
+    dataRegister.email = this.props.currentUser.email;
+    this.setState({
+      register: dataRegister,
+    }); */
+  };
+
   getAddress = (e) => {
     e.preventDefault();
     let register = this.state.register;
-    const code = e.target.value;
+    const address = UserAddress(e.target.value);
     let addressSuburb = window.document.getElementById('neighborhood'),
       addressRua = window.document.getElementById('street'),
       addressCity = window.document.getElementById('city'),
       addressUF = window.document.getElementById('state');
-    const urlCorreio = 'https://viacep.com.br/ws';
-    fetch(`${urlCorreio}/${code}/json/`).then((res) => {
-      if (res.status === 200 && res.statusText === 'OK') {
-        res.json().then((address) => {
-          addressSuburb.value = address.bairro;
-          addressRua.value = address.logradouro;
-          addressCity.value = address.localidade;
-          addressUF.value = address.uf;
-          //reset register
-          register.address.neighborhood = address.bairro;
-          register.address.street = address.logradouro;
-          register.address.city = address.localidade;
-          register.address.state = address.uf;
-          this.setState({
-            register: register,
-          });
-        });
-      }
-    });
-  };
-
-  formSend = (values) => {
-    setTimeout(() => {
-      //alert(JSON.stringify(values, null, 2));
-      //setSubmitting(false);
-      let alert = {
-        error: true,
-        message: {
-          type: 'warning',
-          value: 'Preencha todos os campos',
-        },
-      };
+    if (address) {
+      addressSuburb.value = address.suburb;
+      addressRua.value = address.street;
+      addressCity.value = address.city;
+      addressUF.value = address.state;
+      //reset register
+      register.address.neighborhood = address.bairro;
+      register.address.street = address.logradouro;
+      register.address.city = address.localidade;
+      register.address.state = address.uf;
+      register.address.zipcode = e.target.value;
       this.setState({
-        register: values,
+        register: register,
       });
-      this.props.alert(alert.message);
-      this.props.pay(values);
-    }, 400);
+    }
   };
 
   handledData = (e) => {
@@ -81,10 +68,7 @@ class UserRegister extends Component {
     for (let props in dataRegister) {
       if (props === e.target.name) {
         register[e.target.name] = e.target.value;
-        if (props === 'pay' && e.target.value === 'credit_card') {
-          this.props.setModal();
-          document.getElementById('name').focus();
-        }
+        break;
       } else {
         if (props === 'address') {
           let dataRegisterAddress = this.state.register.address;
@@ -92,30 +76,57 @@ class UserRegister extends Component {
           for (let props1 in address) {
             if (props1 === e.target.name) {
               register.address[e.target.name] = e.target.value;
+              break;
             }
           }
         }
       }
-      this.setState({
-        register: register,
+    }
+    this.setState({
+      register: register,
+    });
+  };
+
+  checkInputs = () => {
+    let dataUser = this.state.register;
+    let error = [];
+    for (let props in dataUser) {
+      if (dataUser[props] === '') {
+        error.push('o campo ' + props + ' é obrigatorio');
+      }
+    }
+    return error;
+  };
+
+  formSend = (e) => {
+    e.preventDefault();
+    const fieldsError = this.checkInputs();
+    if (fieldsError.length) {
+      let errors = fieldsError.map((err, index) => (
+        <li key={'error_' + index}>{err}</li>
+      ));
+      errors = <ul>{errors}</ul>;
+      this.props.alert({
+        type: 'warning',
+        value: errors,
       });
+    } else {
+      const dataRegister = this.state.register;
+      let register = {};
+      for (let props in dataRegister) {
+        if (props !== 'repeats') {
+          register[props] = dataRegister[props];
+        }
+      }
+      register.pay = this.props.typePay;
+      this.props.submitRegister(register, this.state.register.repeats);
+      return;
     }
   };
 
   render() {
     return (
-      <div className="il-gerencianet--form">
-        <h2 className="il-section--title il-text-color--medium-dark">
-          Contratar o plano {this.props.plan}
-        </h2>
-        <h3 className="il-subtitle">Preencha o formulário para continuar</h3>
-        <p className="il-description">
-          Esses dados não serão divulgados e sua importância é apenas para o
-          controle eficiente dos pagamentos.<br></br>No formulário abaixo
-          escolha como deseja fazer o pagamento e escolha o total de meses que
-          gostaria.
-        </p>
-
+      <div>
         <form className="il-form" onSubmit={this.formSend}>
           <div className="il-form--field il-flex">
             <div>
@@ -127,8 +138,11 @@ class UserRegister extends Component {
                 name="name"
                 id="name"
                 onChange={this.handledData}
+                defaultValue={this.props.currentUser.name}
               />
             </div>
+          </div>
+          <div className="il-form--field il-flex">
             <div>
               <label className="il-text-color--light" htmlFor="email">
                 Email
@@ -138,10 +152,9 @@ class UserRegister extends Component {
                 name="email"
                 id="email"
                 onChange={this.handledData}
+                defaultValue={this.props.currentUser.email}
               />
             </div>
-          </div>
-          <div className="il-form--field il-flex">
             <div>
               <label className="il-text-color--light" htmlFor="cpf">
                 CPF
@@ -152,12 +165,14 @@ class UserRegister extends Component {
                 id="cpf"
                 onChange={this.handledData}
               />
+            </div>
+            <div>
               <label className="il-text-color--light" htmlFor="dnasc">
                 Data de Nasc
               </label>
               <input
                 type="date"
-                name="dnasc"
+                name="birth"
                 id="dnasc"
                 onChange={this.handledData}
               />
@@ -165,27 +180,29 @@ class UserRegister extends Component {
           </div>
           <div className="il-form--field il-flex">
             <div>
-              <label className="il-text-color--light" htmlFor="rua_av">
+              <label className="il-text-color--light" htmlFor="street">
                 Rua/Av
               </label>
               <input
                 type="text"
-                name="address.rua_av"
+                name="address.street"
                 onChange={this.handledData}
-                id="rua_av"
-              />
-              <label className="il-text-color--light" htmlFor="nr">
-                Nr
-              </label>
-              <input
-                type="text"
-                name="address.nr"
-                id="nr"
-                onChange={this.handledData}
+                id="street"
               />
             </div>
           </div>
           <div className="il-form--field il-flex">
+            <div>
+              <label className="il-text-color--light" htmlFor="number">
+                Nr
+              </label>
+              <input
+                type="text"
+                name="address.number"
+                id="number"
+                onChange={this.handledData}
+              />
+            </div>
             <div>
               <label className="il-text-color--light" htmlFor="complement">
                 Complemento
@@ -196,31 +213,35 @@ class UserRegister extends Component {
                 id="complement"
                 onChange={this.handledData}
               />
-              <label className="il-text-color--light" htmlFor="suburb">
+            </div>
+            <div>
+              <label className="il-text-color--light" htmlFor="neighborhood">
                 Bairro
               </label>
               <input
                 type="text"
-                name="address.suburb"
+                name="address.neighborhood"
                 onChange={this.handledData}
-                id="suburb"
+                id="neighborhood"
               />
             </div>
           </div>
           <div className="il-form--field il-flex">
             <div>
-              <label className="il-text-color--light" htmlFor="postcode">
+              <label className="il-text-color--light" htmlFor="zipcode">
                 CEP
               </label>
               <input
                 type="text"
-                name="address.postcode"
-                id="postcode"
+                name="address.zipcode"
+                id="zipcode"
                 onChange={this.handledData}
                 onBlur={(e) => {
                   this.getAddress(e);
                 }}
               />
+            </div>
+            <div>
               <label className="il-text-color--light" htmlFor="city">
                 Cidade
               </label>
@@ -230,33 +251,37 @@ class UserRegister extends Component {
                 id="city"
                 onChange={this.handledData}
               />
-              <label className="il-text-color--light" htmlFor="uf">
+            </div>
+            <div>
+              <label className="il-text-color--light" htmlFor="state">
                 UF
               </label>
               <input
                 type="text"
-                name="address.UF"
-                id="uf"
+                name="address.state"
+                id="state"
                 onChange={this.handledData}
               />
             </div>
-          </div>
-          <div className="il-form--field il-flex">
             <div>
               <label className="il-text-color--light" htmlFor="fone">
                 Fone
               </label>
               <input
                 type="phone"
-                name="address.fone"
+                name="phone_number"
                 id="fone"
                 onChange={this.handledData}
               />
-              <label className="il-text-color--light" htmlFor="clr">
-                Celular
-              </label>
-              <input type="phone" name="address.clr" id="clr" />
-              <input type="hidden" name="user_id" onChange={this.handledData} />
+            </div>
+          </div>
+          <div className="il-form--field il-flex">
+            <div>
+              <input
+                type="hidden"
+                name="user_id"
+                defaultValue={this.props.currentUser._id}
+              />
             </div>
           </div>
           <button type="submit" className="il-btn il-btn--center">
@@ -267,5 +292,3 @@ class UserRegister extends Component {
     );
   }
 }
-
-export default UserRegister;

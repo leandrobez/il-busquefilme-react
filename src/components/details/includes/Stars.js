@@ -4,7 +4,7 @@ class Stars extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      votes: props.vote_average
+      votes: props.vote_average,
     };
   }
 
@@ -13,8 +13,8 @@ class Stars extends Component {
     steps: [1, 2, 3, 4, 5],
     stars: {
       active: 0,
-      trunc: 0
-    }
+      trunc: 0,
+    },
   };
 
   createStars = () => {
@@ -30,7 +30,7 @@ class Stars extends Component {
 
   render() {
     const starActives = () => {
-      return this.average.steps.map(step => (
+      return this.average.steps.map((step) => (
         <span className="il-actives" key={'actives-' + step}>
           <i className="fas fa-star"></i>
         </span>
@@ -38,7 +38,7 @@ class Stars extends Component {
     };
 
     const starInactives = () => {
-      return this.average.steps.map(step => (
+      return this.average.steps.map((step) => (
         <span className="il-inactives" key={'inactives-' + step}>
           <i
             className="fas fa-star"

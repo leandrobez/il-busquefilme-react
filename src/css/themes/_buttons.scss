@@ -18,13 +18,13 @@ button.il-btn {
     max-width: 100px;
     margin-left: 0.4rem;
     outline: none;
-    &:hover {
+    /* &:hover {
       background: $primaryColor;
       color: $lightColor;
-    }
+    }*/
     i {
-      margin-left: 0.3rem;
-    }
+      margin-right: 0.3rem;
+    } 
   }
   &.il-btn--card {
     border: none;
@@ -34,12 +34,17 @@ button.il-btn {
     max-width: 210px;
   }
   &.il-btn--plan {
-    background: $thirtyColor;
+    margin: auto;
+    border-radius: 30px;
     color: $lightColor;
-    transition: all 450ms ease-in;
+    transition: all 550ms ease-out;
     border: none;
+    line-height: 40px;
     &:hover {
-      transform: scale(0.95);
+      transition: all 550ms ease-out;
+      background: #d64604;
+      color: $lightColor;
+      transform: scale(0.9);
     }
   }
   &.il-btn--slider {

@@ -93,17 +93,18 @@
       p.il-slider-description {
         display: none;
         color: white;
+        font-size: 0.85rem;
         @media (min-width: 680px) {
           display: block;
           padding: 0.25rem 0;
-          line-height: 1.2;
-          font-size: 1.2rem;
+          line-height: 1;
+          font-size: 1rem;
         }
         @media (min-width: 800px) {
           display: block;
           padding: 0.45rem 0;
-          line-height: 1.4;
-          font-size: 1.4rem;
+          line-height: 1.2;
+          font-size: 1.2rem;
         }
       }
       .il-slider--buttom {
