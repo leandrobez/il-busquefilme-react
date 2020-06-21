@@ -74,7 +74,7 @@ const setAlert = (alertMessage) => {
   let { alert, next } = myProps;
   if (!alertMessage.error) {
     alert(alertMessage.message);
-    next(true, 'home');
+    next(true, 'plans');
   } else {
     alert(alertMessage.message);
     next(false, '');

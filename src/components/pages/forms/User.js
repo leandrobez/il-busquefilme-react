@@ -14,7 +14,7 @@ export default class User extends Component {
         cpf: '70334641772',
         birth: '1961-06-26',
         phone_number: '',
-        pay: 'banking_billet',
+        pay: this.props.typePay,
         address: {
           street: '',
           number: '1248',
@@ -40,26 +40,27 @@ export default class User extends Component {
   getAddress = (e) => {
     e.preventDefault();
     let register = this.state.register;
-    const address = UserAddress(e.target.value);
     let addressSuburb = window.document.getElementById('neighborhood'),
       addressRua = window.document.getElementById('street'),
       addressCity = window.document.getElementById('city'),
       addressUF = window.document.getElementById('state');
-    if (address) {
-      addressSuburb.value = address.suburb;
-      addressRua.value = address.street;
-      addressCity.value = address.city;
-      addressUF.value = address.state;
+    register.address.zipcode = e.target.value;
+    UserAddress(e.target.value).then((data) => {
       //reset register
-      register.address.neighborhood = address.bairro;
-      register.address.street = address.logradouro;
-      register.address.city = address.localidade;
-      register.address.state = address.uf;
-      register.address.zipcode = e.target.value;
+      register.address.neighborhood = data.suburb;
+      register.address.street = data.street;
+      register.address.city = data.city;
+      register.address.state = data.state;
+
+      //reset fields
+      addressSuburb.value = data.suburb;
+      addressRua.value = data.street;
+      addressCity.value = data.city;
+      addressUF.value = data.state;
       this.setState({
         register: register,
       });
-    }
+    });
   };
 
   handledData = (e) => {
@@ -236,9 +237,7 @@ export default class User extends Component {
                 name="address.zipcode"
                 id="zipcode"
                 onChange={this.handledData}
-                onBlur={(e) => {
-                  this.getAddress(e);
-                }}
+                onBlur={this.getAddress}
               />
             </div>
             <div>

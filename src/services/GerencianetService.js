@@ -10,11 +10,25 @@ api.interceptors.request.use(async (config) => {
 });
 
 export const registerCustomer = async (data) => {
-  const endPointRegister = 'register';
-  return await api.post(apiURL + endPointRegister, data);
+  const bearerToken = () => {
+    return {
+      headers: {
+        authorization: 'Bearer ' + localStorage.getItem('@busquefilme-Token'),
+      },
+    };
+  };
+  const endPointRegister = 'customer/register';
+  return await api.post(apiURL + endPointRegister, data, bearerToken());
 };
 
 export const createCheckout = () => {
+  const bearerToken = () => {
+    return {
+      headers: {
+        authorization: 'Bearer ' + localStorage.getItem('@busquefilme-Token'),
+      },
+    };
+  };
   const createPlan = async (plan, repeats) => {
     const endPointPlan = 'gerencianet/plan',
       body = {
@@ -23,7 +37,7 @@ export const createCheckout = () => {
         interval: 1,
       };
 
-    return await api.post(apiURL + endPointPlan, body);
+    return await api.post(apiURL + endPointPlan, body, bearerToken());
   };
 
   const createSubscription = (plan_name, plan_id, currentPlan, customer) => {

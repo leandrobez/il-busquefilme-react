@@ -13,6 +13,7 @@ class UserRegister extends Component {
       showChoices: true,
       showRegister: false,
       showCreditCard: false,
+      showLoader: true
     };
   }
 
@@ -28,17 +29,17 @@ class UserRegister extends Component {
   };
 
   submitRegister = async (dataRegister, repeats) => {
-    /* this.setState({
+    this.setState({
       showLoad: true,
-    }); */
+    });
     let msg = '';
     //register client
-    if (this.props.userAuthenticated) {
+    /* if (this.props.userAuthenticated) {
       this.setAlert({
         type: 'warning',
         value: 'Tudo ok',
       });
-    }
+    } */
     const register = await this.context.register(dataRegister, repeats);
     if (register.customer) {
       if (dataRegister.pay === 'credit_card') {
